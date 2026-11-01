@@ -1,0 +1,11 @@
+{
+  "name": "اطمئنان القرآن – الطمأنينة القرآنية | Quran Reassurance",
+  "description": "منصة إسلامية عالمية شاملة للقرآن الكريم بالرسم العثماني الموثق، التلاوات الصوتية، التفاسير المعتمدة، الترجمات العالمية، خطط الحفظ والختمة، التجويد، مواقيت الصلاة، القبلة، الأذكار، المكتبة الإسلامية، والمساعد القرآني الذكي.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

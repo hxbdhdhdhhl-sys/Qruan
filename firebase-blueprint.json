@@ -1,0 +1,268 @@
+{
+  "entities": {
+    "UserPublic": {
+      "title": "UserPublic",
+      "description": "PII-free user profile and non-sensitive reading preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "photoURL": { "type": "string", "maxLength": 600 },
+        "bio": { "type": "string", "maxLength": 300 },
+        "preferredLang": { "type": "string", "enum": ["ar", "en"], "maxLength": 2 },
+        "preferredReciter": { "type": "string", "minLength": 2, "maxLength": 64 },
+        "lastSurah": { "type": "integer" },
+        "lastAyah": { "type": "integer" },
+        "lastPage": { "type": "integer" },
+        "visibility": { "type": "string", "enum": ["public", "private"], "maxLength": 10 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName", "photoURL", "bio", "preferredLang", "preferredReciter", "lastSurah", "lastAyah", "lastPage", "visibility", "createdAt", "updatedAt"]
+    },
+    "UserPrivate": {
+      "title": "UserPrivate",
+      "description": "Strictly isolated PII and private notification preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "email": { "type": "string", "minLength": 3, "maxLength": 160 },
+        "prayerAlerts": { "type": "boolean" },
+        "adhkarAlerts": { "type": "boolean" },
+        "wirdReminderTime": { "type": "string", "maxLength": 16 },
+        "quietHours": { "type": "string", "maxLength": 32 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "prayerAlerts", "adhkarAlerts", "wirdReminderTime", "quietHours", "createdAt", "updatedAt"]
+    },
+    "StaffRole": {
+      "title": "StaffRole",
+      "description": "Administrative and moderation role assignments",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "role": { "type": "string", "enum": ["admin", "moderator"], "maxLength": 16 },
+        "assignedBy": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "role", "assignedBy", "createdAt", "updatedAt"]
+    },
+    "BookmarkNote": {
+      "title": "BookmarkNote",
+      "description": "Saved favorite verses, reading marks, topic collections, and personal reflections",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "surahNumber": { "type": "integer" },
+        "ayahNumber": { "type": "integer" },
+        "pageNumber": { "type": "integer" },
+        "surahName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "verseExcerpt": { "type": "string", "minLength": 1, "maxLength": 1200 },
+        "collectionTag": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "note": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "surahNumber", "ayahNumber", "pageNumber", "surahName", "verseExcerpt", "collectionTag", "note", "createdAt", "updatedAt"]
+    },
+    "HifzPlan": {
+      "title": "HifzPlan",
+      "description": "Personal Quran memorization schedule and progress tracker",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "targetScope": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "dailyAyahs": { "type": "integer" },
+        "durationDays": { "type": "integer" },
+        "memorizedAyahsCount": { "type": "integer" },
+        "totalTargetAyahs": { "type": "integer" },
+        "currentSurah": { "type": "integer" },
+        "currentAyah": { "type": "integer" },
+        "reminderTime": { "type": "string", "maxLength": 16 },
+        "status": { "type": "string", "enum": ["active", "completed", "paused"], "maxLength": 16 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "targetScope", "dailyAyahs", "durationDays", "memorizedAyahsCount", "totalTargetAyahs", "currentSurah", "currentAyah", "reminderTime", "status", "createdAt", "updatedAt"]
+    },
+    "KhatmahPlan": {
+      "title": "KhatmahPlan",
+      "description": "Personal Quran completion plan and daily Wird progress",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "title": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "durationDays": { "type": "integer" },
+        "dailyPages": { "type": "integer" },
+        "completedPages": { "type": "integer" },
+        "currentJuz": { "type": "integer" },
+        "reminderTime": { "type": "string", "maxLength": 16 },
+        "shareConsent": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["active", "completed"], "maxLength": 16 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "durationDays", "dailyPages", "completedPages", "currentJuz", "reminderTime", "shareConsent", "status", "createdAt", "updatedAt"]
+    },
+    "CommunityGroup": {
+      "title": "CommunityGroup",
+      "description": "Educational Quran study circles, Hifz groups, and collective Khatmah circles",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "minLength": 3, "maxLength": 140 },
+        "description": { "type": "string", "minLength": 5, "maxLength": 600 },
+        "category": { "type": "string", "enum": ["hifz", "revision", "khatmah", "tadabbur", "competition"], "maxLength": 20 },
+        "targetGoal": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "completedUnits": { "type": "integer" },
+        "creatorId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "creatorName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "status": { "type": "string", "enum": ["published", "archived"], "maxLength": 16 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "description", "category", "targetGoal", "completedUnits", "creatorId", "creatorName", "status", "createdAt", "updatedAt"]
+    },
+    "CommunityPost": {
+      "title": "CommunityPost",
+      "description": "Verified Quranic reflections, Juz completions, and educational milestone shares",
+      "type": "object",
+      "properties": {
+        "groupId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "authorId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "authorName": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "postType": { "type": "string", "enum": ["achievement", "juz_claim", "reflection"], "maxLength": 20 },
+        "surahNumber": { "type": "integer" },
+        "ayahNumber": { "type": "integer" },
+        "juzNumber": { "type": "integer" },
+        "body": { "type": "string", "minLength": 2, "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["published", "hidden", "archived"], "maxLength": 16 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["groupId", "authorId", "authorName", "postType", "surahNumber", "ayahNumber", "juzNumber", "body", "status", "createdAt", "updatedAt"]
+    },
+    "ContentReport": {
+      "title": "ContentReport",
+      "description": "Moderation reports for protecting community accuracy and sanctity",
+      "type": "object",
+      "properties": {
+        "targetType": { "type": "string", "enum": ["post", "group"], "maxLength": 16 },
+        "targetId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "reporterId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "reason": { "type": "string", "enum": ["unverified_source", "inaccurate_attribution", "abuse", "spam"], "maxLength": 32 },
+        "details": { "type": "string", "minLength": 3, "maxLength": 600 },
+        "status": { "type": "string", "enum": ["open", "resolved"], "maxLength": 16 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["targetType", "targetId", "reporterId", "reason", "details", "status", "createdAt", "updatedAt"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "Personal reminders and administrative broadcast alerts",
+      "type": "object",
+      "properties": {
+        "recipientId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "scope": { "type": "string", "enum": ["personal", "broadcast"], "maxLength": 16 },
+        "titleAr": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "titleEn": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "messageAr": { "type": "string", "minLength": 2, "maxLength": 600 },
+        "messageEn": { "type": "string", "minLength": 2, "maxLength": 600 },
+        "category": { "type": "string", "enum": ["quran", "prayer", "adhkar", "hifz", "occasion", "system"], "maxLength": 20 },
+        "targetView": { "type": "string", "maxLength": 60 },
+        "isRead": { "type": "boolean" },
+        "authorId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["recipientId", "scope", "titleAr", "titleEn", "messageAr", "messageEn", "category", "targetView", "isRead", "authorId", "createdAt", "updatedAt"]
+    },
+    "AdminCatalogItem": {
+      "title": "AdminCatalogItem",
+      "description": "Verified reciters, tafsir sources, translations, and library books managed by admins",
+      "type": "object",
+      "properties": {
+        "itemType": { "type": "string", "enum": ["reciter", "tafsir", "translation", "book"], "maxLength": 20 },
+        "titleAr": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "titleEn": { "type": "string", "minLength": 2, "maxLength": 160 },
+        "authorName": { "type": "string", "minLength": 2, "maxLength": 120 },
+        "sourceInfo": { "type": "string", "minLength": 3, "maxLength": 300 },
+        "externalUrl": { "type": "string", "maxLength": 600 },
+        "language": { "type": "string", "minLength": 2, "maxLength": 10 },
+        "enabled": { "type": "boolean" },
+        "visibility": { "type": "string", "enum": ["public", "internal"], "maxLength": 16 },
+        "authorId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["itemType", "titleAr", "titleEn", "authorName", "sourceInfo", "externalUrl", "language", "enabled", "visibility", "authorId", "createdAt", "updatedAt"]
+    },
+    "AdminAuditLog": {
+      "title": "AdminAuditLog",
+      "description": "Immutable administrative change log",
+      "type": "object",
+      "properties": {
+        "actorId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "actionType": { "type": "string", "minLength": 2, "maxLength": 60 },
+        "targetCollection": { "type": "string", "minLength": 2, "maxLength": 60 },
+        "targetId": { "type": "string", "maxLength": 128, "pattern": "^[a-zA-Z0-9_\\-]+$" },
+        "summary": { "type": "string", "minLength": 3, "maxLength": 400 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["actorId", "actionType", "targetCollection", "targetId", "summary", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users_public/{userId}": {
+      "schema": { "$ref": "#/entities/UserPublic" },
+      "description": "Public user display profile and non-sensitive reading progress"
+    },
+    "/users_private/{userId}": {
+      "schema": { "$ref": "#/entities/UserPrivate" },
+      "description": "Private user email and notification schedule settings"
+    },
+    "/staff_roles/{userId}": {
+      "schema": { "$ref": "#/entities/StaffRole" },
+      "description": "Administrative and moderator role registry"
+    },
+    "/bookmarks/{bookmarkId}": {
+      "schema": { "$ref": "#/entities/BookmarkNote" },
+      "description": "User favorite Quranic verses, reading bookmarks, and personal reflections"
+    },
+    "/hifz_plans/{planId}": {
+      "schema": { "$ref": "#/entities/HifzPlan" },
+      "description": "User Quran memorization schedules and progress"
+    },
+    "/khatmah_plans/{khatmahId}": {
+      "schema": { "$ref": "#/entities/KhatmahPlan" },
+      "description": "User Khatmah completion schedules and daily Wird progress"
+    },
+    "/community_groups/{groupId}": {
+      "schema": { "$ref": "#/entities/CommunityGroup" },
+      "description": "Quranic study, Hifz, and collective Khatmah circles"
+    },
+    "/community_posts/{postId}": {
+      "schema": { "$ref": "#/entities/CommunityPost" },
+      "description": "Verified community achievements, Juz claims, and Quranic reflections"
+    },
+    "/content_reports/{reportId}": {
+      "schema": { "$ref": "#/entities/ContentReport" },
+      "description": "Community content moderation and source-verification reports"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/AppNotification" },
+      "description": "Personal user reminders and admin broadcast notifications"
+    },
+    "/admin_catalog/{itemId}": {
+      "schema": { "$ref": "#/entities/AdminCatalogItem" },
+      "description": "Admin-managed verified reciters, tafsir editions, translations, and library books"
+    },
+    "/admin_audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AdminAuditLog" },
+      "description": "Immutable audit log of administrative actions"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="اطمئنان القرآن">
+  <defs>
+    <linearGradient id="emeraldBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E4A3A" />
+      <stop offset="100%" stop-color="#072920" />
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5C16C" />
+      <stop offset="100%" stop-color="#B48328" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#emeraldBg)" />
+  <!-- Rub el Hizb Eight-Pointed Star (Safe Zone Centered) -->
+  <g transform="translate(256,256)">
+    <rect x="-112" y="-112" width="224" height="224" rx="14" fill="none" stroke="url(#goldAccent)" stroke-width="14" />
+    <rect x="-112" y="-112" width="224" height="224" rx="14" transform="rotate(45)" fill="none" stroke="url(#goldAccent)" stroke-width="14" />
+    <!-- Open Mushaf Book Motif -->
+    <path d="M-68 18 C-42 2 -16 8 0 24 C16 8 42 2 68 18 L68 -36 C42 -52 16 -46 0 -30 C-16 -46 -42 -52 -68 -36 Z" fill="#FBF9F5" />
+    <line x1="0" y1="-30" x2="0" y2="24" stroke="#0B3B2E" stroke-width="5" stroke-linecap="round" />
+    <circle cx="0" cy="-64" r="9" fill="url(#goldAccent)" />
+  </g>
+</svg>
